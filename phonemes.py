@@ -43,3 +43,8 @@ CONS_W		= 40 # wet, window
 CONS_Z		= 41 # zoo, lazy
 CONS_JJ		= 42 # pleasure, vision
 CONS_J 		= 43 # just, large
+
+PUNC_PERIOD = 44 # period (long pause)
+PUNC_COMMMA = 45 # comma (short pause)
+PUNC_QUESTION = 46 # question
+PUNC_EXCLAIM = 47 # exclamation
