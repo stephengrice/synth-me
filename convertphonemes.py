@@ -2,6 +2,11 @@ import phonemes
 
 def words_to_phonemes(words):
 	# Takes list of words
+	words_in = []
+
+	for word in words:
+		words_in.append(words)
+
 	result = []
 
 	for word in words:
@@ -19,7 +24,7 @@ def word_to_phoneme(word):
 
 	return result
 
-def guess_letters(word):
+def guess_phonemes(word_list):
 	word = word.lower()
 	result = []
 	for l in word:
