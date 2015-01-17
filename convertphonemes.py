@@ -6,13 +6,11 @@ def words_to_phonemes(words, c):
 	result = []
 	for word in words:
 		# Check if the word has been learned
-		c.execute("SELECT * FROM main WHERE word=?", word)
+		c.execute("SELECT * FROM main WHERE word=?", (word,))
 		row = c.fetchone()
 		if row:
 			# Convert phoneme list to python list; return
-			print("WHEFLKAWEHFWEA")
-			print(str(row))
-			return ast.literal_eval(row.phenome_list)
+			result.extend(ast.literal_eval(row['phoneme_list']))
 		else:
 			# If not recognized, take an (un)educated guess
 			for letter in word:
