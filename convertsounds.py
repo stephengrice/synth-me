@@ -15,8 +15,8 @@ def phonemes_to_sounds(phoneme_list):
 
 	output = wave.open(outfile, 'wb')
 	output.setparams(data[0][0])
-	output.writeframes(data[0][1])
-	output.writeframes(data[1][1])
+	for idx, val in enumerate(data):
+		output.writeframes(data[idx][1])
 	output.close()
 
 def get_sound_file(phoneme):
