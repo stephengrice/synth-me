@@ -1,13 +1,26 @@
-import phonemes
+import phonemes, sqlite3, ast
 
-def words_to_phonemes(words):
+def words_to_phonemes(words, c):
 	# Takes list of words and punctuation
+
 	result = []
 	for word in words:
-		for letter in word:
-			result.append(guess_phoneme(letter))
-		result.append(phonemes.PAUSE_WORD)
+		# Check if the word has been learned
+		c.execute("SELECT * FROM main WHERE word=?", word)
+		row = c.fetchone()
+		if row:
+			# Convert phoneme list to python list; return
+			print("WHEFLKAWEHFWEA")
+			print(str(row))
+			return ast.literal_eval(row.phenome_list)
+		else:
+			# If not recognized, take an (un)educated guess
+			for letter in word:
+				result.append(guess_phoneme(letter))
+			result.append(phonemes.PAUSE_WORD)
 	return result
+
+
 
 def guess_phoneme(letter):
 	l = letter.lower()
@@ -73,3 +86,4 @@ def guess_phoneme(letter):
 		return phonemes.PUNC_QUESTION
 	else:
 		return phonemes.PAUSE_WORD
+

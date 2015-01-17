@@ -2,9 +2,8 @@ import wave, phonemes, os
 
 VOICE_PATH = os.path.dirname(__file__) + "/voices/steve/"
 
-def phonemes_to_sounds(phoneme_list):
+def phonemes_to_sounds(phoneme_list, outfile):
 	infiles = []
-	outfile = "output.wav"
 	for phoneme in phoneme_list:
 		infiles.append(get_sound_file(phoneme))
 	data = []
