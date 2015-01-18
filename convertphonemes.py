@@ -13,82 +13,67 @@ def words_to_phonemes(words, c):
 			result.extend(ast.literal_eval(row['phoneme_list']))
 		else:
 			# If not recognized, take an (un)educated guess
-			for letter in word:
-				result.append(guess_phoneme(letter))
+			blocked = phoneme_scan(word)
+			result.extend(phoneme_blocks_to_list(blocked))
 		result.append(phonemes.PAUSE_WORD)
 	return result
 
+def phoneme_blocks_to_list(blocks):
+	blocks_list = re.findall("\[\d+\]", blocks)
+	result = []
+	for b in blocks_list:
+		result.append(int(re.sub(r'\[(\d+)\]', r'\1', b)))
+	return result
+
+
 def phoneme_scan(word):
-	while re.search("[a-zA-Z]", word): # Keep replacing letters with phonemes in brackets [] until there are no more letters
-		word = replace_with_phoneme(word, "oo", phonemes.VOWEL_OO)
-		# do this until no letters haven't been checked
+	while re.search("[a-zA-Z.,;!\?]", word): # Keep replacing letters with phonemes in brackets [] until there are no more letters
+		# Special patterns
+		word = replace_with_phoneme(word, r'oo', phonemes.VOWEL_OO)
+		word = replace_with_phoneme(word, r'ou', phonemes.VOWEL_OO)
+		word = replace_with_phoneme(word, r'ea', phonemes.VOWEL_II)
+		word = replace_with_phoneme(word, r'ph', phonemes.CONS_F)
+		word = replace_with_phoneme(word, r'll', phonemes.CONS_L)
+		word = replace_with_phoneme(word, r'ss', phonemes.CONS_S)
+		word = replace_with_phoneme(word, r'nn', phonemes.CONS_N)
+		word = replace_with_phoneme(word, r'ch', phonemes.CONS_CH)
+		word = replace_with_phoneme(word, r'sh', phonemes.CONS_SH)
+		word = replace_with_phoneme(word, r'th', phonemes.CONS_TH)
+		word = replace_with_phoneme(word, r'ck', phonemes.CONS_K)
+
+		# Default letters
+		word = replace_with_phoneme(word, "a", phonemes.VOWEL_A)
+		word = replace_with_phoneme(word, "b", phonemes.CONS_B)
+		word = replace_with_phoneme(word, "c", phonemes.CONS_K)
+		word = replace_with_phoneme(word, "d", phonemes.CONS_D)
+		word = replace_with_phoneme(word, "e", phonemes.VOWEL_E)
+		word = replace_with_phoneme(word, "f", phonemes.CONS_F)
+		word = replace_with_phoneme(word, "g", phonemes.CONS_G)
+		word = replace_with_phoneme(word, "h", phonemes.CONS_H)
+		word = replace_with_phoneme(word, "i", phonemes.VOWEL_I)
+		word = replace_with_phoneme(word, "j", phonemes.CONS_J)
+		word = replace_with_phoneme(word, "k", phonemes.CONS_K)
+		word = replace_with_phoneme(word, "l", phonemes.CONS_L)
+		word = replace_with_phoneme(word, "m", phonemes.CONS_M)
+		word = replace_with_phoneme(word, "n", phonemes.CONS_N)
+		word = replace_with_phoneme(word, "o", phonemes.VOWEL_O)
+		word = replace_with_phoneme(word, "p", phonemes.CONS_P)
+		word = replace_with_phoneme(word, "q", phonemes.CONS_K)
+		word = replace_with_phoneme(word, "r", phonemes.CONS_R)
+		word = replace_with_phoneme(word, "s", phonemes.CONS_S)
+		word = replace_with_phoneme(word, "t", phonemes.CONS_T)
+		word = replace_with_phoneme(word, "u", phonemes.VOWEL_U)
+		word = replace_with_phoneme(word, "v", phonemes.CONS_V)
+		word = replace_with_phoneme(word, "w", phonemes.CONS_W)
+		word = replace_with_phoneme(word, "x", phonemes.CONS_Z)
+		word = replace_with_phoneme(word, "y", phonemes.CONS_Y)
+		word = replace_with_phoneme(word, "z", phonemes.CONS_Z)
+		word = replace_with_phoneme(word, ".", phonemes.PUNC_PERIOD)
+		word = replace_with_phoneme(word, ",", phonemes.PUNC_COMMA)
+		word = replace_with_phoneme(word, ";", phonemes.PUNC_COMMA)
+		word = replace_with_phoneme(word, "!", phonemes.PUNC_EXCLAIM)
+	return word
 
 def replace_with_phoneme(word, letters, phoneme_id):
 	result = "["+str(phoneme_id)+"]"
 	return word.replace(letters, result)
-
-def guess_phoneme(letter):
-	l = letter.lower()
-	if l == 'a':
-		return phonemes.VOWEL_A
-	elif l == 'b':
-		return phonemes.CONS_B
-	elif l == 'c':
-		return phonemes.CONS_K
-	elif l == 'd':
-		return phonemes.CONS_D
-	elif l == 'e':
-		return phonemes.VOWEL_E
-	elif l == 'f':
-		return phonemes.CONS_F
-	elif l == 'g':
-		return phonemes.CONS_G
-	elif l == 'h':
-		return phonemes.CONS_H
-	elif l == 'i':
-		return phonemes.VOWEL_I
-	elif l == 'j':
-		return phonemes.CONS_J
-	elif l == 'k':
-		return phonemes.CONS_K
-	elif l == 'l':
-		return phonemes.CONS_L
-	elif l == 'm':
-		return phonemes.CONS_M
-	elif l == 'n':
-		return phonemes.CONS_N
-	elif l == 'o':
-		return phonemes.VOWEL_O
-	elif l == 'p':
-		return phonemes.CONS_P
-	elif l == 'q':
-		return phonemes.CONS_K # super primitive!
-	elif l == 'r':
-		return phonemes.CONS_R
-	elif l == 's':
-		return phonemes.CONS_S
-	elif l == 't':
-		return phonemes.CONS_T
-	elif l == 'u':
-		return phonemes.VOWEL_U
-	elif l == 'v':
-		return phonemes.CONS_V
-	elif l == 'w':
-		return phonemes.CONS_W
-	elif l == 'x':
-		return phonemes.CONS_Z
-	elif l == 'y':
-		return phonemes.CONS_Y
-	elif l == 'z':
-		return phonemes.CONS_Z
-	elif l == '.':
-		return phonemes.PUNC_PERIOD
-	elif l == ',' or l == ';':
-		return phonemes.PUNC_COMMA
-	elif l == '!':
-		return phonemes.PUNC_EXCLAIM
-	elif l == '?':
-		return phonemes.PUNC_QUESTION
-	else:
-		return phonemes.PAUSE_WORD
-
