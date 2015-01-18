@@ -1,4 +1,4 @@
-import phonemes, sqlite3, ast
+import phonemes, sqlite3, ast, re
 
 def words_to_phonemes(words, c):
 	# Takes list of words and punctuation
@@ -15,10 +15,17 @@ def words_to_phonemes(words, c):
 			# If not recognized, take an (un)educated guess
 			for letter in word:
 				result.append(guess_phoneme(letter))
-			result.append(phonemes.PAUSE_WORD)
+		result.append(phonemes.PAUSE_WORD)
 	return result
 
+def phoneme_scan(word):
+	while re.search("[a-zA-Z]", word): # Keep replacing letters with phonemes in brackets [] until there are no more letters
+		word = replace_with_phoneme(word, "oo", phonemes.VOWEL_OO)
+		# do this until no letters haven't been checked
 
+def replace_with_phoneme(word, letters, phoneme_id):
+	result = "["+str(phoneme_id)+"]"
+	return word.replace(letters, result)
 
 def guess_phoneme(letter):
 	l = letter.lower()
