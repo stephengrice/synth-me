@@ -1,3 +1,7 @@
+# convertphones.py
+# Takes list of words and finds appropriate phonemes
+# If phoneme not found, an educated guess is made
+
 import phonemes, sqlite3, ast, re
 
 def words_to_phonemes(words, c, use_pronunciation_dict=True):

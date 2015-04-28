@@ -1,3 +1,6 @@
+# tts.py
+# Pulls all three pieces together: convertwords, convertphonemes, convertsounds
+
 import convertwords, convertphonemes, convertsounds, sqlite3
 
 OUTPUT_FILE = "output.wav"

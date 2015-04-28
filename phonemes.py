@@ -1,3 +1,6 @@
+# phonemes.py
+# List of all sounds used
+
 VOWEL_U 	= 0  # cup, luck
 VOWEL_A 	= 1  # arm, father
 VOWEL_AE 	= 2  # cat, black

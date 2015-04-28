@@ -1,3 +1,6 @@
+# convertsounds.py
+# Matches each phoneme from list with appropriate wav file
+
 import wave, phonemes, os
 
 VOICE_PATH = os.path.dirname(__file__) + "/voices/steve/"
