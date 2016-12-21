@@ -19,9 +19,9 @@ This project relies on Python 3.x. It also utilizes SQLite, which shouldn't requ
 Follow the steps below to try the speech synthesizer out.
 
 1. Make sure that all dependencies are installed.
-2. Clone this repository to your local machine.
+2. Clone or download this repository to your local machine.
 3. Open a terminal and navigate to the cloned directory.
-4. Run the command `python console.py`
+4. Run the command `python3 console.py`
 5. You will be prompted for a message. Enter what you want the engine to say!
 6. The program will end. Open output.wav to hear the result.
 
