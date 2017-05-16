@@ -2,22 +2,20 @@
 # Takes list of words and finds appropriate phonemes
 # If phoneme not found, an educated guess is made
 
-from synthme import phonemes
+from synthme import phonemes, util
 import sqlite3, ast, re
 
 def words_to_phonemes(words, c, use_pronunciation_dict=True):
 	# Takes list of words and punctuation
-
 	result = []
 	for word in words:
 		# Check if the word has been learned
 		row = False
 		if use_pronunciation_dict:
-			c.execute("SELECT * FROM main WHERE word=?", (word,))
-			row = c.fetchone()
+			row = util.get_pronunciation(word)
 		if row:
-			# Convert phoneme list to python list; return
-			result.extend(ast.literal_eval(row['phoneme_list']))
+			# Append the syllables in this word
+			result.extend(row)
 		else:
 			# If not recognized, take an (un)educated guess
 			blocked = phoneme_scan(word)
