@@ -2,7 +2,7 @@
 
 Synth-me is a concatenative text-to-speech engine implemented in Python.
 
-I started this project in January 2015. I started the project because I was intrigued by text-to-speech software and wanted to learn more about how it worked.
+I started this project in January 2015 because I was intrigued by text-to-speech software and wanted to learn more about how it worked.
 
 A **concatenative** text-to-speech engine creates an audio representation of text by pasting together a bunch of small audio files to form the whole of the output.
 
@@ -21,7 +21,7 @@ Follow the steps below to try the speech synthesizer out.
 1. Make sure that all dependencies are installed.
 2. Clone or download this repository to your local machine.
 3. Open a terminal and navigate to the cloned directory.
-4. Run the command `python3 console.py`
+4. Run the command `python3 synthme.py`
 5. You will be prompted for a message. Enter what you want the engine to say!
 6. The program will end. Open output.wav to hear the result.
 

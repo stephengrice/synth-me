@@ -2,7 +2,8 @@
 # Takes list of words and finds appropriate phonemes
 # If phoneme not found, an educated guess is made
 
-import phonemes, sqlite3, ast, re
+from synthme import phonemes
+import sqlite3, ast, re
 
 def words_to_phonemes(words, c, use_pronunciation_dict=True):
 	# Takes list of words and punctuation

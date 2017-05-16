@@ -1,10 +1,11 @@
 # tts.py
 # Pulls all three pieces together: convertwords, convertphonemes, convertsounds
 
-import convertwords, convertphonemes, convertsounds, sqlite3
+from synthme import convertwords, convertphonemes, convertsounds
+import sqlite3
 
 OUTPUT_FILE = "output.wav"
-DATABASE_NAME = "pronunciation.db"
+DATABASE_NAME = "data/pronunciation.db"
 
 def text_to_speech(message, output_file=OUTPUT_FILE, debug=False, use_pronunciation_dict=True):
 	debug and print("Text to Speech Generation started.")
