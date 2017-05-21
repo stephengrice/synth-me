@@ -1,6 +1,11 @@
 PRONUNCIATION_CSV_PATH = "data/pronunciation.csv"
 
-import csv
+import csv, re
+
+# Convert raw user input to a list of words
+# TODO: convert numerical values to words
+def tokenize(data):
+	return re.findall(r"[\w']+|[.,!?;]", data.lower())
 
 def get_pronunciation(word):
   with open(PRONUNCIATION_CSV_PATH, 'rt') as f:
@@ -10,4 +15,4 @@ def get_pronunciation(word):
         numbers = row[1].strip().split(' ')
         # map string to integers
         return list(map(int, numbers))
-          
+      
