@@ -9,11 +9,11 @@ A **concatenative** text-to-speech engine creates an audio representation of tex
 There are three steps, including:
 
 * **Text-to-words**, where raw input text is converted into an array of words. This also generally includes converting numerical digits into their word equivalents (ex: turn "5" into "five").
-* **Words-to-phonemes**, where the array of words is converted into phonemes. Phonemes are the individual sounds in a language. As English is not a phonetic language, the pronunciation of a word can vary drastically from its pronunciation. This problem is solved by looking up the pronunciation for a word in a SQLite database. The output is an array of numbers that each correspond to one of the 44 English phonemes.
+* **Words-to-phonemes**, where the array of words is converted into phonemes. Phonemes are the individual sounds in a language. As English is not a phonetic language, the pronunciation of a word can vary drastically from its pronunciation. This problem is solved by looking up the pronunciation for a word in a CSV file. The output is an array of numbers that each correspond to one of the 44 English phonemes.
 * **Phonemes-to-sounds**, where each phoneme is paired with an audio file. This is the point where the actual audio is stitched together. It would also be in this step that the correct voice for the audio is selected, assuming multiple voices are supported.
 
 ## Dependencies
-This project relies on Python 3.x. It also utilizes SQLite, which shouldn't require any additional installations.
+This project relies on Python 3.x.
 
 ## Installation
 Follow the steps below to try the speech synthesizer out.
