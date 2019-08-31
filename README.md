@@ -21,7 +21,8 @@ Follow the steps below to try the speech synthesizer out.
 1. Make sure that all dependencies are installed.
 2. Clone or download this repository to your local machine.
 3. Open a terminal and navigate to the cloned directory.
-4. Run the command `python3 synthme.py`
-5. You will be prompted for a message. Enter what you want the engine to say!
-6. The program will end. Open output.wav to hear the result.
+4. Run: `pip install -r requirements.txt`
+5. Run the command `python3 synthme.py`
+6. You will be prompted for a message. Enter what you want the engine to say!
+7. The program will end. Open output.wav to hear the result.
 
